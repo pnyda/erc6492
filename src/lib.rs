@@ -53,7 +53,7 @@ pub type RpcError = alloy::transports::RpcError<TransportErrorKind>;
 /// # let signature = account.sign_message_sync(message.as_bytes()).unwrap().as_bytes().into();
 /// # let address = account.address();
 /// #
-/// # let provider = ProviderBuilder::new().on_http("https://rpc.sepolia.org".parse().unwrap());
+/// # let provider = ProviderBuilder::new().on_http("https://eth-sepolia.g.alchemy.com/v2/demo".parse().unwrap());
 /// let verification = verify_signature(signature, address, message_hash, &provider).await.unwrap();
 /// assert!(verification.is_valid());
 /// # }
@@ -77,7 +77,7 @@ pub async fn verify_signature(
     let transaction_request =
         TransactionRequest::default().input(TransactionInput::new(bytes.into()));
 
-    let result = provider.call(&transaction_request).await;
+    let result = provider.call(transaction_request).await;
 
     match result {
         Err(e) => {
